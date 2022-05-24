@@ -1,0 +1,75 @@
+<app-nav></app-nav>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="container register">
+        <div class="row">
+            <div class="col-md-3 register-left">   
+                <img src="../assets/img/logo-white.png" alt="Logo"/>
+                <h3>Bienvenido</h3>
+                <input type="submit" name="" value="Iniciar Sesión" (click)="goToPage('login')"/><br/>
+            </div>
+            <div class="col-md-9 register-right">
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        <h3 class="register-heading">Registrarse</h3>
+                        <div class="row register-form">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Nombre *" value="" [ngClass]="{ 'is-invalid': submitted && f['nombre'].errors }" formControlName="nombre"/>
+                                    <div *ngIf="submitted && f['nombre'].errors" class="invalid-feedback">
+                                        <div *ngIf="f['nombre'].errors['required']">Nombre obligatorio</div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="1er Apellido *" value="" [ngClass]="{ 'is-invalid': submitted && f['apellido1'].errors }" formControlName="apellido1"/>
+                                    <div *ngIf="submitted && f['apellido1'].errors" class="invalid-feedback">
+                                        <div *ngIf="f['apellido1'].errors['required']">1er Apellido obligatorio</div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="2do Apellido" value="" [ngClass]="{ 'is-invalid': submitted && f['apellido2'].errors }" formControlName="apellido2"/>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Email *" value="" [ngClass]="{ 'is-invalid': submitted && f['email'].errors }" formControlName="email"/>
+                                    <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+                                        <div *ngIf="f['email'].errors['required']">Email obligatorio</div>
+                                        <div *ngIf="f['email'].errors['email']">Email inválido</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="password" class="form-control" placeholder="Contraseña *" value="" [ngClass]="{ 'is-invalid': submitted && f['password'].errors }" formControlName="password"/>
+                                    <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
+                                        <div *ngIf="f['password'].errors['required']">Contraseña obligatoria</div>
+                                        <div *ngIf="f['password'].errors['minlength']">Contraseña mín. 6 caracteres</div>
+                                        <div *ngIf="f['password'].errors['maxlength']">Contraseña máx. 20 caracteres</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <input type="password" class="form-control"  placeholder="Confirmar Contraseña *" value="" [ngClass]="{ 'is-invalid': submitted && f['confpassword'].errors }" formControlName="confpassword"/>
+                                    <div *ngIf="submitted && f['confpassword'].errors" class="invalid-feedback">
+                                        <div *ngIf="f['confpassword'].errors['required']">Confirmar Contraseña obligatoria</div>
+                                        <div *ngIf="f['confpassword'].errors['matching']">Las contraseñas no coinciden</div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Dirección *" value="" [ngClass]="{ 'is-invalid': submitted && f['direccion'].errors }" formControlName="direccion"/>
+                                    <div *ngIf="submitted && f['direccion'].errors" class="invalid-feedback">
+                                        <div *ngIf="f['direccion'].errors['required']">Dirección obligatoria</div>
+                                    </div>
+                                </div>
+                                <input type="submit" class="btnRegister"  value="Enviar"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<app-footer></app-footer>
