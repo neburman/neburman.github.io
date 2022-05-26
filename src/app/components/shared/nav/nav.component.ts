@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { NavigationStart, Router, Event as NavigationEvent } from '@angular/router';
 import { AuthService } from 'src/app/auth.service';
 import Swal from 'sweetalert2';
 
@@ -8,22 +8,40 @@ import Swal from 'sweetalert2';
   templateUrl: './nav.component.html',
   styleUrls: ['./nav.component.css']
 })
-export class NavComponent implements OnInit {
+export class NavComponent implements OnInit, OnDestroy {
 
   registro: boolean = false;
   login: boolean = false;
+  
   public show:boolean = false;
 
-  constructor(private router: Router, public auth: AuthService, ) { }
+  event$
+  constructor(private router: Router, public auth: AuthService, ) {
+    this.event$
+      =this.router.events
+          .subscribe(
+            (event: NavigationEvent) => {
+              if(event instanceof NavigationStart) {
+                console.log(event.url); 
+                if(event.url === '/signup'){
+                  this.registro=true;
+                }else{
+                  this.registro=false;
+                }
+                if(event.url === '/login'){
+                  this.login=true;
+                }else{
+                  this.login=false;
+                }
+              }
+            });
+   }
 
   ngOnInit(): void {
-    
-    if(this.router.url === '/signup'){
-      this.registro=true;
-    }
-    if(this.router.url === '/login'){
-      this.login=true;
-    }console.log(this.registro, this.login)
+  }
+
+  ngOnDestroy() {
+    this.event$.unsubscribe();
   }
 
   toggle() {
@@ -51,7 +69,4 @@ export class NavComponent implements OnInit {
     })
   }
 
-  toggleCart():void{
-    
-  }
 }
