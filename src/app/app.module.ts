@@ -22,6 +22,7 @@ import { ProductComponent } from './product/product.component';
 import { MdbCarouselModule } from 'mdb-angular-ui-kit/carousel';
 import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
 import { CartItemComponent } from './components/shopping-cart/cart-item/cart-item.component';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import { CartItemComponent } from './components/shopping-cart/cart-item/cart-ite
       {path:'pantalones', component: ProductsComponent},
       {path:'sudaderas', component: ProductsComponent},
       {path:'otros', component: ProductsComponent},
-    ])
+    ]),
+    NoopAnimationsModule
   ],
   providers: [AuthService, UserService, AuthGuard],
   bootstrap: [AppComponent],
