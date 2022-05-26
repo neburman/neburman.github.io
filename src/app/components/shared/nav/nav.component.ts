@@ -65,7 +65,7 @@ export class NavComponent implements OnInit, OnDestroy {
       if (result.isConfirmed) {
         localStorage.removeItem('loggedIn');
       }
-      window.location.reload();
+      this.goToPage('home');
     })
   }
 
