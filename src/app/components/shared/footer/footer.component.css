@@ -30,3 +30,11 @@ footer{
     display: flex;
     flex-direction: column;
 }
+
+#twitter:hover{
+    filter: invert(54%) sepia(16%) saturate(7034%) hue-rotate(166deg) brightness(104%) contrast(107%);
+}
+
+
+
+

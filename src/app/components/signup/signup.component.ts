@@ -68,11 +68,11 @@ export class SignupComponent implements OnInit {
         if(data['inserted'] == true){
           //sweetalert message popup
           Swal.fire({
-          title: 'Bienvenido!!',
-          text:  "Usuario dado de alta correctamente",
+          title: 'Usuario dado de alta correctamente',
+          text:  "Por favor verifique su correo electrónico",
           icon: 'success'
           });
-          this.goToPage('main');
+          this.goToPage('home');
         }else{
           //sweetalert message popup
             Swal.fire({

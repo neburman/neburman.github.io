@@ -5,32 +5,37 @@
         <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"/></svg>
       </a>
 
-      <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+      <ul class="nav col-10 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
         <!--<li><img id="marca" src="/assets/img/logo-16x16.png" alt="OddFox"></li>-->
-        <li><a href="#" id="marca" class="nav-link px-1">OddFox</a></li>
-        <li><a href="#" class="nav-link px-2 text-secondary">Inicio</a></li>
+        <li><a href="#" id="marca" class="nav-link px-1 mx-3" role="button"><h5 class="my-1 mb-x-1">OddFox</h5></a></li>
         <li>
-          <a href="#" class="nav-link px-2 text-white">Productos</a>
+          <a class="nav-link px-2 text-white mx-3" (click)="goToPage('productos')" role="button"><h5 class="my-1 mb-x-1">Productos</h5></a>
           <ul class="dropdown">
-              <li><a href="#">Todos los productos</a></li>
-              <li><a href="#">Camisetas</a></li>
-              <li><a href="#">Sudaderas</a></li>
-              <li><a href="#">Pantalones</a></li>
-              <li><a href="#">Otros</a></li>
+              <li><a (click)="goToPage('productos')" role="button">Todos los productos</a></li>
+              <li><a (click)="goToPage('camisetas')" role="button">Camisetas</a></li>
+              <li><a (click)="goToPage('sudaderas')" role="button">Sudaderas</a></li>
+              <li><a (click)="goToPage('pantalones')" role="button">Pantalones</a></li>
+              <li><a (click)="goToPage('otros')" role="button">Otros</a></li>
           </ul> 
         </li>
-        <li><a href="#" class="nav-link px-2 text-white">Sobre nosotros</a></li>
-        <li><a href="#" class="nav-link px-2 text-white">Contacto</a></li>
+        <li><a class="nav-link px-2 text-white mx-3" role="button"><h5 class="my-1 mb-x-1" (click)="goToPage('about')">Sobre nosotros</h5></a></li>
+        <li><a class="nav-link px-2 text-white mx-3" role="button"><h5 class="my-1 mb-x-1" (click)="goToPage('contact')">Contacto</h5></a></li>
       </ul>
 
-      <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
+      <!--<form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
         <input type="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
-      </form>
+      </form>-->
 
       <div class="text-end">
-        <button type="button" class="btn btn-warning me-2" (click)="goToPage('login')">Login</button>
-        <button type="button" class="btn btn-warning" (click)="goToPage('signup')">Sign-up</button>
+        <button type="button" class="btn btn-warning mx-2" (click)="goToPage('login')" *ngIf="(auth.isLoggedIn) == false && login == false">Iniciar Sesión</button>
+        <button type="button" class="btn btn-warning mx-1" (click)="goToPage('signup')" *ngIf="(auth.isLoggedIn) == false && !registro" >Registrarse</button>
+        <button type="button" class="btn btn-warning me-5" (click)="logout()" *ngIf="(auth.isLoggedIn)">Cerrar Sesión</button>
       </div>
+      <svg xmlns="http://www.w3.org/2000/svg" (click)="toggle()" id="cart" width="35" height="35" fill="currentColor" class="col-30 bi bi-bag mx-3" viewBox="0 0 16 16" role="button">
+        <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z"/>
+      </svg>
+     <app-shopping-cart *ngIf="show" class="transform transition-transform translate-x-full"></app-shopping-cart>
     </div>
-  </div>
+  </div> 
 </header>
+<br>

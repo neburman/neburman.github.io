@@ -1,3 +1,4 @@
+import { AuthService } from './../../auth.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
@@ -13,7 +14,7 @@ import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from
 })
 export class LoginComponent implements OnInit{
 
-  constructor(private router: Router, private http: HttpClient, private formBuilder: FormBuilder) { }
+  constructor(private router: Router, private http: HttpClient, private formBuilder: FormBuilder, private auth: AuthService) { }
   base = environment.base;
   submitted = false;
 
@@ -41,7 +42,7 @@ export class LoginComponent implements OnInit{
 
   onSubmit(){
     var user = this.form.value;
-    return this.http.get<Login>(`${this.base}user/login?email=`+user['email']+`&password=`+user['password']).subscribe(data => {
+    return this.auth.getLogin(user['email'], user['password']).subscribe(data => {
       if(data['loggued'] == true){
         //sweetalert message popup
         Swal.fire({
@@ -49,7 +50,8 @@ export class LoginComponent implements OnInit{
         text:  "Inicio de sesión correcto",
         icon: 'success'
         });
-        this.goToPage('main');
+        this.auth.setLoggedIn(true);
+        this.goToPage('home');
       }else{
         //sweetalert message popup
           Swal.fire({
@@ -57,8 +59,15 @@ export class LoginComponent implements OnInit{
           text:  "Usuario o contraseña incorrectos",
           icon: 'error'
           });
+          this.auth.setLoggedIn(false);
           this.submitted = false;
       }
+    });
+  }
+
+  resetPass(){
+    var user = this.form.value;
+    return this.auth.getResetPass(user['email']).subscribe(data =>{
     });
   }
 
@@ -66,15 +75,4 @@ export class LoginComponent implements OnInit{
     this.submitted = false;
     this.form.reset();
   }
-}
-
-interface Login{
-  loggued : boolean;
-  user : LoguedUser;
-}
-
-interface LoguedUser{
-  Nombre : string;
-  Email : string;
-  Auth : boolean;
 }

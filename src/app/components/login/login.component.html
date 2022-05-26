@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -40,7 +41,7 @@
  
   </head>
   <body class="text-center">
-    
+
 <main class="form-signin">
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <img class="mb-4" src="../assets/img/logo.png" alt="" width="80" height="80">
@@ -69,7 +70,9 @@
       </label>
     </div>-->
     <button class="w-100 btn btn-lg btn-primary mb-4" type="submit">Iniciar Sesión</button>
-    <a class="mt-5 mb-3 link-secondary" (click)="goToPage('signup')">Registrarse</a>
+    <a class="mt-5 mb-3 link-secondary" (click)="resetPass()" role="button">Olvidé mi contraseña</a>
+    <br>
+    <a class="mt-5 mb-3 link-secondary" (click)="goToPage('signup')" role="button">Registrarse</a>
   </form>
 </main>
   </body>
